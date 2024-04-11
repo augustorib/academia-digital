@@ -17,15 +17,20 @@ public class AlunoController {
     @Autowired
     private AlunoServiceImpl alunoService;
 
-    @GetMapping
-    public List<Aluno> getAll(){
-        return alunoService.getAll();
-    }
+//    @GetMapping
+//    public List<Aluno> getAll(){
+//        return alunoService.getAll();
+//    }
 
     @GetMapping("avaliacoes/{id}")
     public List<AvaliacaoFisica> getAllAvaliacaoFisica(@PathVariable Long id){
 
         return alunoService.getAllAvaliacaoFisica(id);
+    }
+
+    @GetMapping
+    public List<Aluno> getAll(@RequestParam(value = "dataDeNascimento", required = false) String dataDeNascimento){
+        return alunoService.getAll(dataDeNascimento);
     }
 
     @PostMapping
