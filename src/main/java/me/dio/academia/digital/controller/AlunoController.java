@@ -1,13 +1,15 @@
 package me.dio.academia.digital.controller;
 
+import jakarta.validation.Valid;
 import me.dio.academia.digital.entity.Aluno;
 import me.dio.academia.digital.entity.AvaliacaoFisica;
 import me.dio.academia.digital.entity.form.AlunoForm;
+import me.dio.academia.digital.entity.form.AlunoUpdateForm;
 import me.dio.academia.digital.service.impl.AlunoServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -16,11 +18,6 @@ public class AlunoController {
 
     @Autowired
     private AlunoServiceImpl alunoService;
-
-//    @GetMapping
-//    public List<Aluno> getAll(){
-//        return alunoService.getAll();
-//    }
 
     @GetMapping("avaliacoes/{id}")
     public List<AvaliacaoFisica> getAllAvaliacaoFisica(@PathVariable Long id){
@@ -38,5 +35,15 @@ public class AlunoController {
         return alunoService.create(form);
     }
 
+
+    @DeleteMapping("/{id}")
+    public void delete(@PathVariable Long id){
+         alunoService.delete(id);
+    }
+
+    @PutMapping("/{id}")
+    public Aluno update(@PathVariable Long id, @RequestBody AlunoUpdateForm form){
+        return alunoService.update(id, form );
+    }
 
 }
